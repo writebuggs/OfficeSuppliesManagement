@@ -1,0 +1,94 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Admin.ManageItemsModel
+@{
+    ViewData["Title"] = "Manage Items";
+}
+
+<h2>Manage Items</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label for="ItemCode">Item Code</label>
+        <input type="text" id="ItemCode" name="NewItem.ItemCode" required />
+    </div>
+    <div>
+        <label for="ItemName">Item Name</label>
+        <input type="text" id="ItemName" name="NewItem.ItemName" required />
+    </div>
+    <div>
+        <label for="Category">Category</label>
+        <select id="Category" name="NewItem.Category" required>
+            <option value="Paper">Paper</option>
+            <option value="Stationery">Stationery</option>
+            <option value="Cutlery">Cutlery</option>
+            <option value="Documents">Documents</option>
+            <option value="Gifts">Gifts</option>
+            <option value="Others">Others</option>
+        </select>
+    </div>
+    <div>
+        <label for="Origin">Origin</label>
+        <select id="Origin" name="NewItem.Origin" required>
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+            <option value="Germany">Germany</option>
+            <option value="Japan">Japan</option>
+            <option value="Others">Others</option>
+        </select>
+    </div>
+    <div>
+        <label for="Specification">Specification</label>
+        <input type="text" id="Specification" name="NewItem.Specification" required />
+    </div>
+    <div>
+        <label for="Model">Model</label>
+        <input type="text" id="Model" name="NewItem.Model" required />
+    </div>
+    <div>
+        <label for="ImagePath">Item Image</label>
+        <input type="file" id="ImagePath" name="ImagePath" />
+    </div>
+    <button type="submit">Add Item</button>
+</form>
+
+<h3>Existing Items</h3>
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Item Code</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Origin</th>
+                <th>Specification</th>
+                <th>Model</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ItemCode</td>
+                    <td>@item.ItemName</td>
+                    <td>@item.Category</td>
+                    <td>@item.Origin</td>
+                    <td>@item.Specification</td>
+                    <td>@item.Model</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@item.ItemCode">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No items found.</p>
+}
