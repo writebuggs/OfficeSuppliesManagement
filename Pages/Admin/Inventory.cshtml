@@ -1,0 +1,90 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Admin.InventoryModel
+@{
+    ViewData["Title"] = "Inventory Query";
+}
+
+<h2>Inventory Query</h2>
+
+<h3>Current Inventory</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Category</th>
+            <th>Origin</th>
+            <th>Specification</th>
+            <th>Model</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ItemCode</td>
+                <td>@item.ItemName</td>
+                <td>@item.Category</td>
+                <td>@item.Origin</td>
+                <td>@item.Specification</td>
+                <td>@item.Model</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Inbound Records</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Inbound ID</th>
+            <th>Item Code</th>
+            <th>Purchase Date</th>
+            <th>Purchase Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inbound in Model.Inbounds)
+        {
+            <tr>
+                <td>@inbound.InboundId</td>
+                <td>@inbound.ItemCode</td>
+                <td>@inbound.PurchaseDate.ToString("yyyy-MM-dd")</td>
+                <td>@inbound.PurchaseQuantity</td>
+                <td>@inbound.UnitPrice</td>
+                <td>@inbound.TotalPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Outbound Records</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Outbound ID</th>
+            <th>Item Code</th>
+            <th>Quantity</th>
+            <th>User ID</th>
+            <th>Outbound Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var outbound in Model.Outbounds)
+        {
+            <tr>
+                <td>@outbound.OutboundId</td>
+                <td>@outbound.ItemCode</td>
+                <td>@outbound.Quantity</td>
+                <td>@outbound.UserId</td>
+                <td>@outbound.OutboundDate.ToString("yyyy-MM-dd")</td>
+                <td>@outbound.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

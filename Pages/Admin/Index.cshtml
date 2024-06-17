@@ -1,0 +1,17 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Admin Home";
+}
+
+<h2>Admin Home</h2>
+
+<nav>
+    <ul>
+        <li><a asp-page="/Admin/ManageUsers">User Maintenance</a></li>
+        <li><a asp-page="/Admin/ManageItems">Item Information</a></li>
+        <li><a asp-page="/Admin/InboundItems">Item Inbound</a></li>
+        <li><a asp-page="/Admin/OutboundItems">Item Outbound</a></li>
+        <li><a asp-page="/Admin/Inventory">Inventory Query</a></li>
+    </ul>
+</nav>
