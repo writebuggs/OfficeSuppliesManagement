@@ -33,21 +33,35 @@ namespace OfficeSuppliesManagement.Pages.Users
         {
             if (ModelState.IsValid)
             {
-                NewOutbound.UserId = User.Identity.Name;  // 或其他用户标识
                 NewOutbound.OutboundDate = DateTime.Now;
-                NewOutbound.Status = "Requested";
+
                 _context.Outbounds.Add(NewOutbound);
                 await _context.SaveChangesAsync();
-                return RedirectToPage();
+
+                return RedirectToPage();  // 重新加载页面
             }
-            LoadData();
+            else
+            {
+                // 输出ModelState错误信息到控制台
+                foreach (var modelStateKey in ModelState.Keys)
+                {
+                    var value = ModelState[modelStateKey];
+                    var errors = value.Errors;
+                    foreach (var error in errors)
+                    {
+                        Console.WriteLine($"Error in {modelStateKey}: {error.ErrorMessage}");
+                    }
+                }
+            }
+
+            LoadData();  // 如果ModelState无效，重新加载数据
             return Page();
         }
 
         private void LoadData()
         {
             Items = _context.Items.ToList();
-            Outbounds = _context.Outbounds.Where(o => o.UserId == User.Identity.Name).ToList();
+            Outbounds = _context.Outbounds.Where(o => o.UserId == "123").ToList();
         }
     }
 }

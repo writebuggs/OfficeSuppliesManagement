@@ -1,7 +1,4 @@
-﻿// ApplicationDbContext.cs
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using OfficeSuppliesManagement.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using OfficeSuppliesManagement.Models;
 
 namespace OfficeSuppliesManagement.Data
@@ -19,4 +16,3 @@ namespace OfficeSuppliesManagement.Data
         public DbSet<Outbound> Outbounds { get; set; }
     }
 }
-
