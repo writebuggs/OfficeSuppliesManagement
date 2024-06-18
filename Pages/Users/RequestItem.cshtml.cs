@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OfficeSuppliesManagement.Data;
@@ -31,9 +32,13 @@ namespace OfficeSuppliesManagement.Pages.Users
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            var userName = HttpContext.Session.GetString("UserName");
+
+            if ( !string.IsNullOrEmpty(userName))
             {
+                NewOutbound.UserId = userName;  // 从会话中获取当前用户标识
                 NewOutbound.OutboundDate = DateTime.Now;
+                NewOutbound.Status = "Requested";
 
                 _context.Outbounds.Add(NewOutbound);
                 await _context.SaveChangesAsync();
@@ -61,7 +66,8 @@ namespace OfficeSuppliesManagement.Pages.Users
         private void LoadData()
         {
             Items = _context.Items.ToList();
-            Outbounds = _context.Outbounds.Where(o => o.UserId == "123").ToList();
+            var userName = HttpContext.Session.GetString("UserName");
+            Outbounds = _context.Outbounds.Where(o => o.UserId == userName).ToList();
         }
     }
 }

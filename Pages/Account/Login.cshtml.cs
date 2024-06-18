@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OfficeSuppliesManagement.Models;
@@ -24,6 +25,7 @@ namespace OfficeSuppliesManagement.Pages.Account
         {
             if (UserName == "admin" && Password == "0000")
             {
+                HttpContext.Session.SetString("UserName", "admin");
                 return RedirectToPage("/Admin/Index");
             }
 
@@ -31,6 +33,7 @@ namespace OfficeSuppliesManagement.Pages.Account
             var user = users.SingleOrDefault(u => u.UserId == UserName && u.Password == Password);
             if (user != null)
             {
+                HttpContext.Session.SetString("UserName", user.UserId);
                 return RedirectToPage("/Users/Index");
             }
 

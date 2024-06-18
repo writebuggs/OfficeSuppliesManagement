@@ -22,8 +22,15 @@ namespace OfficeSuppliesManagement
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
-        }
 
+            // 添加会话支持
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -43,6 +50,9 @@ namespace OfficeSuppliesManagement
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // 使用会话中间件
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
