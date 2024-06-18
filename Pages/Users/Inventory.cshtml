@@ -1,0 +1,35 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Users.InventoryModel
+@{
+    ViewData["Title"] = "Inventory Query";
+}
+
+<h2>Inventory Query</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Category</th>
+            <th>Origin</th>
+            <th>Specification</th>
+            <th>Model</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ItemCode</td>
+                <td>@item.ItemName</td>
+                <td>@item.Category</td>
+                <td>@item.Origin</td>
+                <td>@item.Specification</td>
+                <td>@item.Model</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

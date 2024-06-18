@@ -1,0 +1,14 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "User Home";
+}
+
+<h2>User Home</h2>
+
+<nav>
+    <ul>
+        <li><a asp-page="/Users/Inventory">Inventory Query</a></li>
+        <li><a asp-page="/Users/RequestItem">Request Item</a></li>
+    </ul>
+</nav>

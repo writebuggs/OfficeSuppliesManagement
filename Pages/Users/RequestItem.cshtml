@@ -1,0 +1,49 @@
+﻿@page
+@model OfficeSuppliesManagement.Pages.Users.RequestItemModel
+@{
+    ViewData["Title"] = "Request Item";
+}
+
+<h2>Request Item</h2>
+
+<form method="post">
+    <div>
+        <label for="ItemCode">Item Code</label>
+        <select id="ItemCode" name="NewOutbound.ItemCode" required>
+            @foreach (var item in Model.Items)
+            {
+                <option value="@item.ItemCode">@item.ItemName (@item.ItemCode)</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="Quantity">Quantity</label>
+        <input type="number" id="Quantity" name="NewOutbound.Quantity" required />
+    </div>
+    <button type="submit">Request Item</button>
+</form>
+
+<h3>My Requests</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Outbound ID</th>
+            <th>Item Code</th>
+            <th>Quantity</th>
+            <th>Request Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var outbound in Model.Outbounds)
+        {
+            <tr>
+                <td>@outbound.OutboundId</td>
+                <td>@outbound.ItemCode</td>
+                <td>@outbound.Quantity</td>
+                <td>@outbound.OutboundDate.ToString("yyyy-MM-dd")</td>
+                <td>@outbound.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
